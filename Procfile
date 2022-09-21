@@ -1,1 +1,1 @@
-web: gunicorn MISClinica.wsgi
+web: gunicorn authProject.wsgi

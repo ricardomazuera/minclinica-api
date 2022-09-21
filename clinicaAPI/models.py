@@ -1,5 +1,5 @@
 from operator import mod
-# from _tkinter import CASCADE
+from tkinter import CASCADE
 from django.db import models
 
 class Persona(models.Model):
