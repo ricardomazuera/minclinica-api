@@ -188,7 +188,8 @@ def getAllPacientes(request):
         allPacientesData = []
         for x,y in zip(pacientes,personas):
             data = {    
-                    "id": y.id,
+                    "id": x.id,
+                    "dni": y.id,
                     "firstName": y.firstName,
                     "lastName": y.lastName,
                     "phone": y.phone,
@@ -220,7 +221,7 @@ def getOnePaciente(request, id):
 
         data = {
             "id": paciente.id,
-            "id_pers": persona.id,
+            "dni": persona.id,
             "firstName": persona.firstName, 
             "lastName": persona.lastName, 
             "phone": persona.phone, 
