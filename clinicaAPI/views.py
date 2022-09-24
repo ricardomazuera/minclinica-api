@@ -86,16 +86,18 @@ def newMedico(request):
             pers = Persona.objects.filter(id = data["personaId"]).first()
             if (not pers):
                 return HttpResponseBadRequest("No existe persona con esa cédula.")
-            paci = Paciente.objects.filter(id = data["pacienteId"]).first()
-            if (not paci):
-                return HttpResponseBadRequest("No existe Paciente con ese Id")
-            
-            medico = Medico (
-                    persona = pers,
-                    paciente = paci,
-                    registro = data["registro"],
-                )    
-            medico .save()
+               
+            medi = Medico.objects.filter(id = data["medicoId"]).first()
+            if (medi):
+                return HttpResponseBadRequest("Ya existe un médico con ese documento de identidad")
+            else:     
+                medico = Medico (
+                        id = data["personaId"],
+                        persona = pers,
+                        especialidad = data["especialidad"],
+                        registro = data["registro"],
+                    )    
+                medico .save()
             return HttpResponse("Nuevo médico agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")

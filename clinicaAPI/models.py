@@ -26,9 +26,9 @@ class Familiar (models.Model):
     email = models.EmailField()
 
 class Medico(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     persona = models.ForeignKey(Persona,default=1, on_delete=models.CASCADE)
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    especialidad = models.CharField(max_length=30)
     registro = models.BigIntegerField()
 
 class EnfermeroAuxiliar (models.Model):
