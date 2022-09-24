@@ -61,10 +61,10 @@ def newFamiliar(request):
 
             persona = Persona.objects.filter(id = data["personaId"]).first()
             if (not persona):
-                return HttpResponseBadRequest("No existe persona con ese Id")
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
             paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
             if (not paciente):
-                return HttpResponseBadRequest("No existe Paciente con ese Id")    
+                return HttpResponseBadRequest("No existe paciente con esa identificación")    
         
             familiar = Familiar(
                     persona = persona,
@@ -73,7 +73,7 @@ def newFamiliar(request):
                     email = data["email"],               
                 )
             familiar.save()
-            return HttpResponse("Nueva familiar agregado")
+            return HttpResponse("Nuevo familiar agregado")
         except:
             return HttpResponseBadRequest("Error en los datos enviados")
     else:
