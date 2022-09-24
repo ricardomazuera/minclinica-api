@@ -228,7 +228,9 @@ def getOnePaciente(request, id):
             "gender": persona.gender,
             "address": paciente.address,
             "city": paciente.city,
-            "birthday":paciente.birthday
+            "birthday":paciente.birthday,
+            "latitude": paciente.latitude, 
+            "longitud": paciente.longitud
         }
         dataJson = json.dumps(data)
         resp = HttpResponse()
