@@ -32,7 +32,7 @@ def newPaciente(request):
             data = json.loads(request.body)
             pers = Persona.objects.filter(id = data["personaId"]).first()
             if (not pers):
-                return HttpResponseBadRequest("No existe cliente con esa cédula.")
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
 
             paci = Paciente.objects.filter(id = data["pacienteId"]).first()
             if (paci):
@@ -81,7 +81,7 @@ def newFamiliar(request):
 
 def newMedico(request):
     if request.method == 'POST':
-        try:
+        # try:
             data = json.loads(request.body)
             pers = Persona.objects.filter(id = data["personaId"]).first()
             if (not pers):
@@ -99,8 +99,8 @@ def newMedico(request):
                     )    
                 medico .save()
             return HttpResponse("Nuevo médico agregado")
-        except:
-            return HttpResponseBadRequest("Error en los datos enviados")
+        # except:
+        #     return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
 
