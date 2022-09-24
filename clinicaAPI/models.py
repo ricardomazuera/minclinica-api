@@ -36,7 +36,7 @@ class Medico(models.Model):
     id = models.AutoField(primary_key=True)
     persona = models.ForeignKey(Persona,default=1, on_delete=models.CASCADE)
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    registro = models.ForeignKey(Registro,default=1, on_delete=models.CASCADE)
+    registro = models.CharField(max_length=50)
 
 class EnfermeroAuxiliar (models.Model):
     id = models.AutoField(primary_key=True)

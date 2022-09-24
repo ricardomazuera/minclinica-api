@@ -129,18 +129,15 @@ def newMedico(request):
             data = json.loads(request.body)
             pers = Persona.objects.filter(id = data["userID"]).first()
             if (not pers):
-                return HttpResponseBadRequest("No existe cliente con esa cédula.")
-            paciente = Paciente.objects.filter(id = data["pacienteId"]).first()
-            if (not paciente):
+                return HttpResponseBadRequest("No existe persona con esa cédula.")
+            paci = Paciente.objects.filter(id = data["pacienteId"]).first()
+            if (not paci):
                 return HttpResponseBadRequest("No existe Paciente con ese Id")
-            registro = Registro.objects.filter(id = data["registroId"]).first()
-            if (not paciente):
-                return HttpResponseBadRequest("No existe Registro con ese Id")
-
+           
             medico = Medico (
                 persona = pers,
-                paciente = paciente,
-                registro = registro
+                paciente = paci,
+                registro = data["registro"],
             )    
             medico .save()
             return HttpResponse("Nuevo médico agregado")
