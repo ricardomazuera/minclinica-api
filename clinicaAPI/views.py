@@ -31,14 +31,14 @@ def newFamiliar(request):
 
 def newPersona(request):
     if request.method == 'POST':
-        try:
+        # try:
             data = json.loads(request.body)
             persona = Persona.objects.filter(id = data["personaId"]).first()
             if (persona):
                 return HttpResponseBadRequest("Ya existe una persona con ese documento de identidad")
             else:
                 persona = Persona(
-                    id = data["id"],
+                    id = data["personaId"],
                     firstName = data["firstName"],
                     lastName = data["lastName"],
                     phone = data["phone"],
@@ -46,8 +46,8 @@ def newPersona(request):
                 )
                 persona.save()
             return HttpResponse("Nuevo cliente agregado")
-        except:
-            return HttpResponseBadRequest("Error en los datos enviados")
+        # except:
+        #     return HttpResponseBadRequest("Error en los datos enviados")
     else:
         return HttpResponseNotAllowed(['POST'], "Método inválido")
 
