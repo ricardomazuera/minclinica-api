@@ -160,21 +160,24 @@ def getAllPacientes(request):
             return HttpResponseBadRequest("No hay personas en la base de datos.")
 
         allPacientesData = []
-        for x,y in zip(pacientes,personas):
-            data = {    
-                    "id": x.id,
-                    "dni": y.id,
-                    "firstName": y.firstName,
-                    "lastName": y.lastName,
-                    "phone": y.phone,
-                    "gender": y.gender,
-                    "address": x.address, 
-                    "city": x.city, 
-                    "birthday": x.birthday,
-                    "latitude": x.latitude, 
-                    "longitud": x.longitud
-                    }
-            allPacientesData.append(data)
+
+        for x in pacientes:
+            for y in personas:
+                if x.id == y.id:
+                    data = {    
+                        "id": x.id,
+                        "dni": y.id,
+                        "firstName": y.firstName,
+                        "lastName": y.lastName,
+                        "phone": y.phone,
+                        "gender": y.gender,
+                        "address": x.address, 
+                        "city": x.city, 
+                        "birthday": x.birthday,
+                        "latitude": x.latitude, 
+                        "longitud": x.longitud
+                        }
+                    allPacientesData.append(data)
         dataJson = json.dumps(allPacientesData)
         resp = HttpResponse()
         resp.headers['Content-Type'] = "text/json"
