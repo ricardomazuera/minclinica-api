@@ -1,4 +1,5 @@
 from operator import mod
+from unittest.util import _MAX_LENGTH
 # from _tkinter import CASCADE
 from django.db import models
 
@@ -34,7 +35,7 @@ class Medico(models.Model):
 class EnfermeroAuxiliar (models.Model):
     id = models.AutoField(primary_key=True)
     persona = models.ForeignKey(Persona, default=1, on_delete=models.CASCADE)
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
+    password = models.CharField(max_length=30)
 
 class JefeEnfermeria(models.Model):
     id = models.AutoField(primary_key=True)
