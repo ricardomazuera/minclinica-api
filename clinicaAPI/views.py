@@ -1,6 +1,10 @@
 import json
 import datetime
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed
+from django.conf import settings
+from rest_framework_simplejwt.backends import TokenBackend
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import Familiar, Persona, Paciente, Medico, JefeEnfermeria, EnfermeroAuxiliar
 
 
@@ -139,7 +143,7 @@ def newEnfermeroAuxiliar(request):
                
             auxEnf = EnfermeroAuxiliar.objects.filter(id = data["auxEnfId"]).first()
             if (auxEnf):
-                return HttpResponseBadRequest("Ya existe un auxiliar de enfermería con ese documento de identidad")
+                return HttpResponseBadRequest("Ya existe un registro con ese documento de identidad")
             else:     
                 enfermeroAuxiliar = EnfermeroAuxiliar (
                         id = data["auxEnfId"],
@@ -147,7 +151,7 @@ def newEnfermeroAuxiliar(request):
                         password = data["password"],
                     )    
                 enfermeroAuxiliar .save()
-            return HttpResponse("Nuevo auxiliar de enfermería agregado")
+            return HttpResponse("Nuevo registro agregado")
         # except:
         #     return HttpResponseBadRequest("Error en los datos enviados")
     else:
