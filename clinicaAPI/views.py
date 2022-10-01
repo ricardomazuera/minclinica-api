@@ -224,6 +224,34 @@ def getOnePaciente(request, id):
         return resp
     else:
         return HttpResponseNotAllowed(['GET'], "Método inválido")
+
+def getOneMedico(request, id):
+    if request.method == 'GET':
+        medico = Medico.objects.filter(id = id).first()
+        if (not medico):
+            return HttpResponseBadRequest("No existe medico con esa cédula.")
+
+        persona = Persona.objects.filter(medico = id).first()
+        if (not persona):
+            return HttpResponseBadRequest("No existe medico con esa cédula.")
+
+        data = {
+            "id": medico.id,
+            "dni": persona.id,
+            "firstName": persona.firstName, 
+            "lastName": persona.lastName, 
+            "phone": persona.phone, 
+            "gender": persona.gender,
+            "especialidad": medico.especialidad, 
+            "registro": medico.registro
+        }
+        dataJson = json.dumps(data)
+        resp = HttpResponse()
+        resp.headers['Content-Type'] = "text/json"
+        resp.content = dataJson
+        return resp
+    else:
+        return HttpResponseNotAllowed(['GET'], "Método inválido")
         
 def getAllMedico(request):
     if request.method == 'GET':
